@@ -1,0 +1,112 @@
+.signup-container-wrapper {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.signup-container-wrapper .signup-container {
+	font-family: "Roboto Condensed", sans-serif;
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.signup-container-wrapper .signup-container .signup-heading-sub-heading {
+	color: #6a0dad;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.25);
+}
+
+.signup-container-wrapper .signup-container .signup-inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.signup-container-wrapper .signup-container .signup-inputs .signup-input {
+	outline: #6a0dad;
+	box-shadow: rgba(0, 0, 0, 0.35) 1.95px 1.95px 2.6px;
+}
+
+.signup-container-wrapper
+	.signup-container
+	.signup-inputs
+	.signup-input::placeholder {
+	color: #818181;
+}
+
+.signup-container-wrapper .signup-container .checkbox-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.signup-container-wrapper
+	.signup-container
+	.checkbox-container
+	input[type="checkbox"] {
+	accent-color: #6a0dad;
+	transform: scale(1.3);
+	border-radius: 1px;
+}
+
+.signup-container-wrapper .signup-container .checkbox-container label {
+	color: rgba(129, 129, 129, 1);
+}
+
+.signup-container-wrapper .signup-container .checkbox-container a {
+	text-decoration: none;
+	font-weight: 550;
+	color: rgba(106, 13, 173, 1);
+}
+
+.signup-container-wrapper .signup-container .signup-button-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 12px;
+}
+
+.signup-container-wrapper
+	.signup-container
+	.signup-button-wrapper
+	.signup-button {
+	font-size: 14px;
+	width: 162px;
+	padding: 12px 10px;
+	font-weight: 600;
+	color: white;
+	border: none;
+	background: linear-gradient(
+		90.63deg,
+		#6a0dad -5.98%,
+		rgba(106, 13, 173, 0.57) 118.08%
+	);
+	border-radius: 5px;
+}
+
+.signup-container-wrapper .signup-container .login-link-wrapper p {
+	color: rgba(129, 129, 129, 1);
+}
+
+.signup-container-wrapper .signup-container .login-link-wrapper a {
+	text-decoration: none;
+	color: #6a0dad;
+	font-weight: 550;
+}
+
+@media screen and (max-width: 820px) {
+	.signup-container-wrapper .signup-container {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.signup-container-wrapper .signup-container {
+		width: 90%;
+	}
+}
