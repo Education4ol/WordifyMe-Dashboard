@@ -33,7 +33,7 @@ const SignUp = () => {
 
 	const handleSignUp = () => {
 		if (password === confirmPass) {
-			const data = axios.post("http://localhost:8082/v1/auth/register", {
+			const data = axios.post("https://wordifyme-dashboard-backend-production.up.railway.app/v1/auth/register", {
 				name,
 				email,
 				contact,
