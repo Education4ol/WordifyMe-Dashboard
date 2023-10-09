@@ -14,7 +14,6 @@ const Login = () => {
 			contact,
 			password,
 		});
-		console.log(data);
 	};
 	return (
 		<>
@@ -50,7 +49,10 @@ const Login = () => {
 					<div className="checkbox-container">
 						<div>
 							<input value="test" type="checkbox" name="remember" />
-							&nbsp; <label htmlFor="remember">Keep me logged In</label>
+							&nbsp;{" "}
+							<label htmlFor="remember" id="remember">
+								Keep me logged In
+							</label>
 						</div>
 						<div>
 							<Link to="/">Forgot Password?</Link>

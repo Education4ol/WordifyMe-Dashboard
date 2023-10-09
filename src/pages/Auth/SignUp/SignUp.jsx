@@ -3,6 +3,7 @@ import "./SignUp.css";
 import { Input } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { notification, Space, Button } from "antd";
 
 const SignUp = () => {
 	const [name, setName] = useState("");
@@ -10,6 +11,25 @@ const SignUp = () => {
 	const [contact, setContact] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPass, setConfirmPass] = useState("");
+	const [api, contextHolder] = notification.useNotification();
+	const [loadings, setLoadings] = useState([]);
+	const openNotification = (type) => {
+		if (type === "error") {
+			api[type]({
+				message: "Error",
+				description: "Passwords do not match",
+
+				duration: 3,
+			});
+		} else {
+			api[type]({
+				message: "Sucess",
+				description: "User Registered Successfully",
+
+				duration: 3,
+			});
+		}
+	};
 
 	const handleSignUp = () => {
 		if (password === confirmPass) {
@@ -19,14 +39,30 @@ const SignUp = () => {
 				contact,
 				password,
 			});
-			console.log(data);
+			openNotification("success");
 		} else {
-			alert("Passwords do not match");
+			openNotification("error");
 		}
+	};
+
+	const enterLoading = (index) => {
+		setLoadings((prevLoadings) => {
+			const newLoadings = [...prevLoadings];
+			newLoadings[index] = true;
+			return newLoadings;
+		});
+		setTimeout(() => {
+			setLoadings((prevLoadings) => {
+				const newLoadings = [...prevLoadings];
+				newLoadings[index] = false;
+				return newLoadings;
+			});
+		}, 6000);
 	};
 
 	return (
 		<>
+			{contextHolder}
 			<div className="signup-container-wrapper">
 				<div className="signup-container">
 					<div className="signup-heading-sub-heading">
@@ -92,9 +128,16 @@ const SignUp = () => {
 						</div>
 					</div>
 					<div className="signup-button-wrapper">
-						<button className="signup-button" onClick={handleSignUp}>
+						<Button
+							className="signup-button"
+							loading={loadings[0]}
+							onClick={() => {
+								enterLoading(0);
+								handleSignUp;
+							}}
+						>
 							Create an account
-						</button>
+						</Button>
 					</div>
 					<div className="login-link-wrapper">
 						<p>
