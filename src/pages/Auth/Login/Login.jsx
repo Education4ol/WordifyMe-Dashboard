@@ -10,7 +10,7 @@ const Login = () => {
 	const [contact, setContact] = useState("");
 	const [password, setPassword] = useState("");
 	const handleLogin = () => {
-		const data = axios.post("http://localhost:8082/v1/auth/login", {
+		const data = axios.post("https://wordifyme-dashboard-backend-production.up.railway.app/v1/auth/login", {
 			contact,
 			password,
 		});
