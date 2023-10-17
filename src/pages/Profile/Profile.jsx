@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ConfigProvider } from "antd";
+import Sidebar from "../../Components/sidebarComponent"; // Import the Sidebar component
 
 import "./Profile.css";
 import {
@@ -110,40 +111,38 @@ const App = () => {
 				minHeight: "100vh",
 			}}
 		>
+
+
+
 			<Sider
-				collapsible
-				collapsed={collapsed}
-				onCollapse={(value) => setCollapsed(value)}
-				className="layout-sider"
-			>
-				{collapsed ? (
-					<div>
-						<h1>L</h1>
-					</div>
-				) : (
-					<div>
-						<h1>Logo</h1>
-					</div>
-				)}
-				<div className="menu-wrapper">
-					<Menu
-						defaultSelectedKeys={["1"]}
-						mode="inline"
-						items={items}
-						theme="dark"
-						onSelect={handleMenuItemClick}
-					></Menu>
-					<div className="logout-button-wrapper">
-						<Button
-							type="text"
-							icon={<LogoutOutlined />}
-							className="log-out-button"
-						>
-							Logout
-						</Button>
-					</div>
-				</div>
-			</Sider>
+                collapsible
+                collapsed={collapsed}
+                onCollapse={(value) => setCollapsed(value)}
+                className="layout-sider"
+                style={{ background: "#2c0547" }} // Change the background color here
+            >
+                {collapsed ? (
+                    <div>
+                        <h1 style={{ color: "white" , textAlign:"center" , paddingTop:20 }} >W</h1>
+                    </div>
+                ) : (
+                    <div>
+                        <h1 style={{ color: "white" , textAlign:"center" , paddingTop:20 }} >WordifyMe</h1>
+                    </div>
+                )}
+                <div className="menu-wrapper" style={{marginTop:40}}>
+                    <Menu defaultSelectedKeys={["1"]} style={{ background: "#2c0547" }} mode="inline" items={items} theme="dark" onSelect={handleMenuItemClick}></Menu>
+                    
+                </div>
+            </Sider>
+
+
+
+
+
+
+
+
 			<Layout>
 				<Header
 					style={{
