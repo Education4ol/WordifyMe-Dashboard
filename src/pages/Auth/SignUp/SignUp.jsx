@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignUp.css";
 import { Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { notification, Space, Button } from "antd";
 
@@ -13,38 +13,70 @@ const SignUp = () => {
 	const [confirmPass, setConfirmPass] = useState("");
 	const [api, contextHolder] = notification.useNotification();
 	const [loadings, setLoadings] = useState([]);
-	const openNotification = (type) => {
+	const navigate = useNavigate();
+	////////////Redirect Function///////////////
+	const redirect = () => {
+		setTimeout(() => {
+			return navigate("/v1/profile");
+		}, 4000);
+	};
+	///////////////////////////////////////////
+
+	//////Handling Notifications////////////////
+	const openNotification = (type, message) => {
 		if (type === "error") {
 			api[type]({
 				message: "Error",
-				description: "Passwords do not match",
+				description: `${message}`,
 
 				duration: 3,
 			});
-		} else {
+		}
+		if (type === "warning") {
 			api[type]({
-				message: "Sucess",
-				description: "User Registered Successfully",
+				message: "Warning",
+				description: message,
 
 				duration: 3,
 			});
 		}
 	};
+	////////////////////////////////////////////
 
-	const handleSignUp = () => {
+	//////Handling Signup Button/////////
+	const handleSignUp = async () => {
+		enterLoading(0);
 		if (password === confirmPass) {
-			const data = axios.post("https://wordifyme-dashboard-backend-production.up.railway.app/v1/auth/register", {
-				name,
-				email,
-				contact,
-				password,
-			});
-			openNotification("success");
+			const data = await axios
+				.post(
+					"https://wordifyme-dashboard-backend-production.up.railway.app/v1/auth/register",
+					{
+						name,
+						email,
+						contact,
+						password,
+					}
+				)
+				.catch(function (error) {
+					openNotification("error", `${error.response.data.message}`);
+				});
+			if (data) {
+				console.log(data.data.statusCode);
+
+				if (data.data.statusCode === 201) {
+					openNotification("success", `${data.message}`);
+					redirect();
+				} else {
+					openNotification("warning", `${data.data.message}`);
+				}
+			}
 		} else {
-			openNotification("error");
+			openNotification("error", "Passwords do not match");
 		}
 	};
+	///////////////////////////////////////////////////////
 
+	/////Loading after button is Clicked//////////////////////
 	const enterLoading = (index) => {
 		setLoadings((prevLoadings) => {
 			const newLoadings = [...prevLoadings];
@@ -57,9 +89,9 @@ const SignUp = () => {
 				newLoadings[index] = false;
 				return newLoadings;
 			});
-		}, 6000);
+		}, 4000);
 	};
-
+	////////////////////////////////////////////////
 	return (
 		<>
 			{contextHolder}
@@ -131,10 +163,7 @@ const SignUp = () => {
 						<Button
 							className="signup-button"
 							loading={loadings[0]}
-							onClick={() => {
-								enterLoading(0);
-								handleSignUp;
-							}}
+							onClick={handleSignUp}
 						>
 							Create an account
 						</Button>

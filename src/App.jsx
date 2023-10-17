@@ -1,16 +1,9 @@
 import "./App.css";
-import Login from "./pages/Auth/Login/Login";
-import SignUp from "./pages/Auth/SignUp/SignUp";
-import { Routes, Route } from "react-router-dom";
+
+import createRoutes from "./Routes/v1/Routes";
 function App() {
-	return (
-		<>
-			<Routes>
-				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<SignUp />} />
-			</Routes>
-		</>
-	);
+	const routes = createRoutes();
+	return <>{routes}</>;
 }
 
 export default App;

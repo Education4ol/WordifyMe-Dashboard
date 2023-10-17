@@ -1,0 +1,18 @@
+.card-content-wrapper {
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.card-content-wrapper .card-content-container {
+	display: flex;
+	gap: 14px;
+}
+
+.user-cards-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	justify-content: stretch;
+}

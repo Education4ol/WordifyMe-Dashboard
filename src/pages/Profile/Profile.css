@@ -1,0 +1,21 @@
+.layout-sider {
+	background-color: #660ca6;
+}
+
+.menu-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.menu-wrapper .logout-button-wrapper {
+	padding-left: 11px;
+}
+
+.menu-wrapper .logout-button-wrapper .log-out-button {
+	color: rgba(255, 255, 255, 0.65);
+}
+
+.menu-wrapper .logout-button-wrapper .log-out-button:hover {
+	color: white;
+}
