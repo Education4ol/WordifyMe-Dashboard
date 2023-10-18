@@ -15,6 +15,15 @@
 .menu-wrapper .logout-button-wrapper .log-out-button {
 	color: rgba(255, 255, 255, 0.65);
 }
+.menu-wrapper .logout-button-wrapper .log-out-button-icon {
+	color: rgba(255, 255, 255, 0.65);
+	margin-left: 11px;
+	transition: 0.5s;
+}
+
+.menu-wrapper .logout-button-wrapper .log-out-button-icon:hover {
+	color: white;
+}
 
 .menu-wrapper .logout-button-wrapper .log-out-button:hover {
 	color: white;

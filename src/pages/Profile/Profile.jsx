@@ -134,13 +134,21 @@ const App = () => {
 						onSelect={handleMenuItemClick}
 					></Menu>
 					<div className="logout-button-wrapper">
-						<Button
-							type="text"
-							icon={<LogoutOutlined />}
-							className="log-out-button"
-						>
-							Logout
-						</Button>
+						{collapsed ? (
+							<Button
+								type="text"
+								icon={<LogoutOutlined />}
+								className="log-out-button-icon"
+							></Button>
+						) : (
+							<Button
+								type="text"
+								icon={<LogoutOutlined />}
+								className="log-out-button"
+							>
+								Logout
+							</Button>
+						)}
 					</div>
 				</div>
 			</Sider>
