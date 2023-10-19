@@ -1,100 +1,656 @@
 import React, { useState } from "react";
-import { ConfigProvider } from "antd";
+import Sidebar from "../../Components/sidebarComponent"; // Import the Sidebar component
 
 import "./Profile.css";
-import {
-	DesktopOutlined,
-	FileOutlined,
-	PieChartOutlined,
-	TeamOutlined,
-	UserOutlined,
-	LogoutOutlined,
-} from "@ant-design/icons";
+
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
-import UserCard from "../../Components/UserCard";
+
+import TableComponent from "../../Components/TableComponent";
+import DrawerComponent from "../../Components/DrawerComponent";
 const { Header, Content, Footer, Sider } = Layout;
-///////////Menu Item //////////////////////////////////////
-function getItem(label, key, icon, children) {
-	return {
-		key,
-		icon,
-		children,
-		label,
-	};
-}
-const items = [
-	getItem("Option 1", "1", <PieChartOutlined />),
-	getItem("Option 2", "2", <DesktopOutlined />),
-	getItem("User", "sub1", <UserOutlined />, [
-		getItem("Tom", "3"),
-		getItem("Bill", "4"),
-		getItem("Alex", "5"),
-	]),
-	getItem("Team", "sub2", <TeamOutlined />, [
-		getItem("Team 1", "6"),
-		getItem("Team 2", "8"),
-	]),
-	getItem("Files", "9", <FileOutlined />),
-	getItem("Users", "10", <UserOutlined />),
-];
+
 ///////////////////////////////////////////////////////
 const App = () => {
 	const [collapsed, setCollapsed] = useState(false);
 	const [elementKey, setElementKey] = useState("");
+
+	////////Drawer functions///////////////////////////
+	const [open, setOpen] = useState(false);
+	const [editData, setEditData] = useState("");
+
+	const onClose = () => {
+		setOpen(false);
+	};
+
+	const handelEdit = (record) => {
+		setEditData(record);
+		setOpen(true);
+	};
+	/////////////////////////////////////////////////////
+	const [dataSource, setDataSource] = useState([
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "User2",
+			status: "unPaid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "audumber",
+			status: "Paid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "User4",
+			status: "Paid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "User3",
+			status: "Paid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "User10",
+			status: "Unpaid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "User8",
+			status: "UnPaid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+		{
+			email: "audu1@email.com",
+			city: "city_not_set",
+			college: "college_not_set",
+			dob: "dob_not_set",
+			gender: "gender_not_set",
+			interest: ["INTEREST_NOT_SET"],
+			walletMoney: 500,
+			address: "address_not_set",
+			profileImage:
+				"https://i.pinimg.com/564x/33/ba/df/33badf7bd7e2bd56b21e3d972fe3ed5a.jpg",
+			points: 40,
+			favoriteWords: [],
+			wordCategories: [
+				{
+					name: "Category 1",
+					totalWords: 10,
+					likes: 5,
+					isPremium: false,
+					tags: ["English", "Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1b",
+							word: "Word 1",
+							meaning: "Meaning 1",
+							Image: "Image URL 1",
+							use_case: "Usage 1",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1c",
+							word: "Word 2",
+							meaning: "Meaning 2",
+							Image: "Image URL 2",
+							use_case: "Usage 2",
+						},
+					],
+				},
+				{
+					name: "Category 2",
+					totalWords: 15,
+					likes: 8,
+					isPremium: true,
+					tags: ["English", "Advanced Vocabulary"],
+					wordsList: [
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1e",
+							word: "Word 3",
+							meaning: "Meaning 3",
+							Image: "Image URL 3",
+							use_case: "Usage 3",
+						},
+						{
+							isKnown: "unknown",
+							_id: "652e06d08a913003acdc2e1f",
+							word: "Word 4",
+							meaning: "Meaning 4",
+							Image: "Image URL 4",
+							use_case: "Usage 4",
+						},
+					],
+				},
+			],
+			profession: "PROFESSION_NOT_SET",
+			topics: ["Technology", "English"],
+			examAspirant: true,
+			premiumUser: false,
+			_id: "652e8183c454ec33e4a98541",
+			name: "User6",
+			status: "paid",
+			contact: "7798121777",
+			password: "$2a$10$NlmK5EO04L/cF74kG9ailupzXwnCebPSCBHR9B9CJ5FAMHRUsJUha",
+			level_of_english: "L1",
+			createdAt: "2023-10-17T12:43:47.972Z",
+			updatedAt: "2023-10-17T14:00:09.365Z",
+			__v: 1,
+			action: "Edit",
+		},
+	]);
 	const {
 		token: { colorBgContainer },
 	} = theme.useToken();
+
 	////////////Fetching users////////////////////////////
-	const users = [
+
+	const columns = [
 		{
-			img: "",
-			name: "Name 1",
-			Field1: "field Content 1",
-			Field2: "Field Content 2",
-			Field3: "Field Content",
-			Field4: "Field Content",
-			Field5: "Field Content",
-			Field6: "Field Content",
+			title: "Users",
+			dataIndex: "name",
+			key: "name",
+			render: (text, record) => (
+				<div className="username-profile-img-container">
+					<img
+						src={record.profileImage}
+						alt={text}
+						style={{ width: "50px", marginRight: "10px" }}
+					/>
+					{text}
+				</div>
+			),
 		},
 		{
-			img: "",
-			name: "Name 2",
-			Field1: "field Content 1",
-			Field2: "Field Content 2",
-			Field3: "Field Content",
-			Field4: "Field Content",
-			Field5: "Field Content",
-			Field6: "Field Content",
+			title: "Conatact No",
+			dataIndex: "contact",
+			key: "contact",
 		},
 		{
-			img: "",
-			name: "Name 3",
-			Field1: "field Content 1",
-			Field2: "Field Content 2",
-			Field3: "Field Content",
-			Field4: "Field Content",
-			Field5: "Field Content",
-			Field6: "Field Content",
+			title: "Status",
+			dataIndex: "status",
+			key: "status",
+			render: (text) => (
+				<div
+					style={{
+						fontWeight: "600",
+						color: text.toLowerCase() === "paid" ? "green" : "red",
+					}}
+				>
+					{text}
+				</div>
+			),
 		},
 		{
-			img: "",
-			name: "Name 4",
-			Field1: "field Content 1",
-			Field2: "Field Content 2",
-			Field3: "Field Content",
-			Field4: "Field Content",
-			Field5: "Field Content",
-			Field6: "Field Content",
+			title: "Joining Date",
+			dataIndex: "createdAt",
+			key: "createdAt",
 		},
+
 		{
-			img: "",
-			name: "Name 5",
-			Field1: "field Content 1",
-			Field2: "Field Content 2",
-			Field3: "Field Content",
-			Field4: "Field Content",
-			Field5: "Field Content",
-			Field6: "Field Content",
+			title: "",
+			dataIndex: "action",
+			key: "_id",
+			render: (text, record) => (
+				<Button
+					onClick={() => {
+						handelEdit(record);
+					}}
+				>
+					{text}
+				</Button>
+			),
 		},
 	];
 
@@ -110,48 +666,11 @@ const App = () => {
 				minHeight: "100vh",
 			}}
 		>
-			<Sider
-				collapsible
+			<Sidebar
 				collapsed={collapsed}
-				onCollapse={(value) => setCollapsed(value)}
-				className="layout-sider"
-			>
-				{collapsed ? (
-					<div>
-						<h1>L</h1>
-					</div>
-				) : (
-					<div>
-						<h1>Logo</h1>
-					</div>
-				)}
-				<div className="menu-wrapper">
-					<Menu
-						defaultSelectedKeys={["1"]}
-						mode="inline"
-						items={items}
-						theme="dark"
-						onSelect={handleMenuItemClick}
-					></Menu>
-					<div className="logout-button-wrapper">
-						{collapsed ? (
-							<Button
-								type="text"
-								icon={<LogoutOutlined />}
-								className="log-out-button-icon"
-							></Button>
-						) : (
-							<Button
-								type="text"
-								icon={<LogoutOutlined />}
-								className="log-out-button"
-							>
-								Logout
-							</Button>
-						)}
-					</div>
-				</div>
-			</Sider>
+				setCollapsed={setCollapsed}
+				handleMenuItemClick={handleMenuItemClick}
+			/>
 			<Layout>
 				<Header
 					style={{
@@ -176,25 +695,21 @@ const App = () => {
 							background: colorBgContainer,
 						}}
 					>
-						<div className="user-cards-container">
-							{elementKey == 10
-								? users.map((user, index) => {
-										return (
-											<UserCard
-												key={index}
-												name={user.name}
-												Field1={user.Field1}
-												Field2={user.Field2}
-												Field3={user.Field3}
-												Field4={user.Field4}
-												Field5={user.Field5}
-												Field6={user.Field6}
-											/>
-										);
-								  })
-								: ""}
-						</div>
+						{elementKey == 10 ? (
+							<TableComponent columns={columns} dataSource={dataSource} />
+						) : (
+							""
+						)}
 					</div>
+					{/* Drawer Component */}
+					<DrawerComponent
+						open={open}
+						setOpen={setOpen}
+						onClose={onClose}
+						editData={editData}
+						setDataSource={setDataSource}
+					/>
+					;
 				</Content>
 				<Footer
 					style={{

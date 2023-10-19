@@ -20,7 +20,9 @@ const DrawerComponent = (props) => {
 				}
 			>
 				<p>Some contents...</p>
-				<p>{props.name}</p>
+				<p>{props.editData.email}</p>
+				<p>{props.editData.name}</p>
+				<p>{props.editData.contact}</p>
 				<p>Some contents...</p>
 			</Drawer>
 		</div>

@@ -28,3 +28,19 @@
 .menu-wrapper .logout-button-wrapper .log-out-button:hover {
 	color: white;
 }
+
+.username-profile-img-container {
+	display: flex;
+
+	align-items: center;
+}
+
+.paid-tag {
+	font-weight: 600;
+	color: green;
+}
+
+.unpaid-tag {
+	font-weight: 600;
+	color: red;
+}
