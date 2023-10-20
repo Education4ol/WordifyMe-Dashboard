@@ -1,7 +1,27 @@
-import { Drawer, Space, Button } from "antd";
-import React from "react";
-
+import { Drawer, Space, Button, Input } from "antd";
+import React, { useState } from "react";
+import data from "../assets/data";
 const DrawerComponent = (props) => {
+	const [name, setName] = useState("");
+	const [contact, setContact] = useState("");
+	const [status, setStatus] = useState("");
+	const { editData } = props;
+
+	const handleSave = () => {
+		const editedData = data.find(({ _id }) => _id == editData._id);
+		const index = data.indexOf(editedData);
+		const newData = {
+			...data[0],
+			name,
+			contact,
+			status,
+			key: index,
+		};
+		console.log("index : ", index);
+		data.splice(index, 1, newData);
+		console.log("New Data", data);
+	};
+
 	return (
 		<div>
 			<Drawer
@@ -19,11 +39,34 @@ const DrawerComponent = (props) => {
 					</Space>
 				}
 			>
-				<p>Some contents...</p>
-				<p>{props.editData.email}</p>
-				<p>{props.editData.name}</p>
-				<p>{props.editData.contact}</p>
-				<p>Some contents...</p>
+				<label htmlFor="name"> Name</label>
+				<Input
+					placeholder={editData.name}
+					id="name"
+					name="name"
+					onKeyUp={(e) => {
+						setName(e.target.value);
+					}}
+				/>
+				<label htmlFor="contact"> Contact</label>
+				<Input
+					placeholder={editData.contact}
+					id="contact"
+					name="contact"
+					onKeyUp={(e) => {
+						setContact(e.target.value);
+					}}
+				/>
+				<label htmlFor="status">Status</label>
+				<Input
+					placeholder={editData.status}
+					id="status"
+					name="status"
+					onKeyUp={(e) => {
+						setStatus(e.target.value);
+					}}
+				/>
+				<Button onClick={handleSave}>Save</Button>
 			</Drawer>
 		</div>
 	);

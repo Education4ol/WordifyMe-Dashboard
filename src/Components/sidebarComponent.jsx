@@ -9,6 +9,7 @@ import {
 	UserOutlined,
 	LogoutOutlined,
 } from "@ant-design/icons";
+import MenuComponent from "./MenuComponent";
 const Sidebar = (props) => {
 	///////////Menu Item //////////////////////////////////////
 	function getItem(label, key, icon, children) {
@@ -57,14 +58,14 @@ const Sidebar = (props) => {
 					</div>
 				)}
 				<div className="menu-wrapper" style={{ marginTop: 40 }}>
-					<Menu
+					<MenuComponent
 						defaultSelectedKeys={["1"]}
 						style={{ background: "#2c0547" }}
 						mode="inline"
 						items={items}
 						theme="dark"
 						onSelect={props.handleMenuItemClick}
-					></Menu>
+					/>
 				</div>
 			</Sider>
 		</>
