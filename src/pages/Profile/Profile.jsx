@@ -18,6 +18,7 @@ const App = () => {
 	const [open, setOpen] = useState(false);
 	const [editData, setEditData] = useState("");
 	const [searched, setSearched] = useState("");
+	const [dataSource, setDataSource] = useState(data);
 
 	const onClose = () => {
 		setOpen(false);
@@ -58,13 +59,13 @@ const App = () => {
 					String(record.status).toLowerCase().includes(value.toLowerCase())
 				);
 			},
+			shouldCellUpdate: (prevRecord, nextRecord) =>
+				prevRecord.name !== nextRecord.name,
 		},
 		{
 			title: "Conatact No",
 			dataIndex: "contact",
 			key: "contact",
-			shouldCellUpdate: (prevRecord, nextRecord) =>
-				prevRecord.contact !== nextRecord.contact,
 		},
 		{
 			title: "Status",
@@ -80,8 +81,6 @@ const App = () => {
 					{text}
 				</div>
 			),
-			shouldCellUpdate: (prevRecord, nextRecord) =>
-				prevRecord.status != nextRecord.status,
 		},
 		{
 			title: "Joining Date",
@@ -155,7 +154,7 @@ const App = () => {
 									}}
 									style={{ width: "50%", marginBottom: 10 }}
 								/>
-								<TableComponent columns={columns} dataSource={data} />
+								<TableComponent columns={columns} dataSource={dataSource} />
 							</div>
 						) : (
 							""
@@ -168,6 +167,8 @@ const App = () => {
 						onClose={onClose}
 						editData={editData}
 						setEditData={setEditData}
+						dataSource={dataSource}
+						setDataSource={setDataSource}
 					/>
 					;
 				</Content>

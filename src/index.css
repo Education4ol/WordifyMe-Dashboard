@@ -16,3 +16,20 @@
 	gap: 5px;
 	justify-content: stretch;
 }
+
+.drawer-content-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.drawer-content-wrapper .drawer-content-edit {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.drawer-content-wrapper .drawer-content-edit-button {
+	display: flex;
+	justify-content: center;
+}

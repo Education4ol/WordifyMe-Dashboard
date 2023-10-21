@@ -1,11 +1,23 @@
 import { Drawer, Space, Button, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../assets/data";
+import { notification } from "antd";
 const DrawerComponent = (props) => {
 	const [name, setName] = useState("");
 	const [contact, setContact] = useState("");
 	const [status, setStatus] = useState("");
-	const { editData } = props;
+	const [api, contextHolder] = notification.useNotification();
+	const { editData, dataSource, setDataSource } = props;
+	////////////Notification///////////////////////////////
+	const openNotification = (type, message) => {
+		api[type]({
+			message: "Success",
+			description: message,
+			duration: 3,
+		});
+	};
+
+	///////////////////User Updating/////////////////////////
 
 	const handleSave = () => {
 		const editedData = data.find(({ _id }) => _id == editData._id);
@@ -15,15 +27,17 @@ const DrawerComponent = (props) => {
 			name,
 			contact,
 			status,
-			key: index,
 		};
-		console.log("index : ", index);
+		props.setEditData("");
 		data.splice(index, 1, newData);
-		console.log("New Data", data);
+		const UpdatedData = data;
+		setDataSource(UpdatedData);
+		openNotification("success", "User Updated Successfully");
 	};
 
 	return (
-		<div>
+		<>
+			{contextHolder}
 			<Drawer
 				title="Edit Details"
 				placement="right"
@@ -39,36 +53,48 @@ const DrawerComponent = (props) => {
 					</Space>
 				}
 			>
-				<label htmlFor="name"> Name</label>
-				<Input
-					placeholder={editData.name}
-					id="name"
-					name="name"
-					onKeyUp={(e) => {
-						setName(e.target.value);
-					}}
-				/>
-				<label htmlFor="contact"> Contact</label>
-				<Input
-					placeholder={editData.contact}
-					id="contact"
-					name="contact"
-					onKeyUp={(e) => {
-						setContact(e.target.value);
-					}}
-				/>
-				<label htmlFor="status">Status</label>
-				<Input
-					placeholder={editData.status}
-					id="status"
-					name="status"
-					onKeyUp={(e) => {
-						setStatus(e.target.value);
-					}}
-				/>
-				<Button onClick={handleSave}>Save</Button>
+				<div className="drawer-content-wrapper">
+					<div className="drawer-content-edit">
+						<label htmlFor="name"> Name</label>
+						<Input
+							placeholder={editData.name}
+							id="name"
+							name="name"
+							onChange={(e) => {
+								setName(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="drawer-content-edit">
+						<label htmlFor="contact"> Contact</label>
+						<Input
+							placeholder={editData.contact}
+							id="contact"
+							name="contact"
+							onChange={(e) => {
+								setContact(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="drawer-content-edit">
+						<label htmlFor="status">Status</label>
+						<Input
+							placeholder={editData.status}
+							id="status"
+							name="status"
+							onKeyUp={(e) => {
+								setStatus(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="drawer-content-edit-button">
+						<Button type="primary" onClick={handleSave}>
+							Save
+						</Button>
+					</div>
+				</div>
 			</Drawer>
-		</div>
+		</>
 	);
 };
 

@@ -7,7 +7,7 @@ import { LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import { notification, Space, Button } from "antd";
+import { notification, Button } from "antd";
 
 const Login = ({ auth, setAuth }) => {
 	const [contact, setContact] = useState("");
