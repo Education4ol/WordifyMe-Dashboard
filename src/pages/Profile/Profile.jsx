@@ -4,10 +4,10 @@ import data from "../../assets/data";
 import "./Profile.css";
 
 import { Breadcrumb, Layout, Menu, theme, Button, Input } from "antd";
-
+import NotificationComponent from "../../Components/NotificationComponent";
 import TableComponent from "../../Components/TableComponent";
 import DrawerComponent from "../../Components/DrawerComponent";
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 ///////////////////////////////////////////////////////
 const App = () => {
@@ -145,7 +145,7 @@ const App = () => {
 							background: colorBgContainer,
 						}}
 					>
-						{elementKey == 10 ? (
+						{elementKey == 4 ? (
 							<div>
 								<Input
 									placeholder="Search Here....."
@@ -156,6 +156,12 @@ const App = () => {
 								/>
 								<TableComponent columns={columns} dataSource={dataSource} />
 							</div>
+						) : elementKey == 1 ? (
+							<NotificationComponent push={true} />
+						) : elementKey == 2 ? (
+							<NotificationComponent whatsapp={true} />
+						) : elementKey == 3 ? (
+							<NotificationComponent email={true} />
 						) : (
 							""
 						)}

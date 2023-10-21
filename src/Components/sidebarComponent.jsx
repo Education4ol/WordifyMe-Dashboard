@@ -2,12 +2,10 @@ import React from "react";
 import Sider from "antd/es/layout/Sider";
 import { Menu } from "antd";
 import {
-	DesktopOutlined,
-	FileOutlined,
-	PieChartOutlined,
 	TeamOutlined,
 	UserOutlined,
 	LogoutOutlined,
+	BellOutlined,
 } from "@ant-design/icons";
 import MenuComponent from "./MenuComponent";
 const Sidebar = (props) => {
@@ -21,19 +19,12 @@ const Sidebar = (props) => {
 		};
 	}
 	const items = [
-		getItem("Option 1", "1", <PieChartOutlined />),
-		getItem("Option 2", "2", <DesktopOutlined />),
-		getItem("User", "sub1", <UserOutlined />, [
-			getItem("Tom", "3"),
-			getItem("Bill", "4"),
-			getItem("Alex", "5"),
+		getItem("Notifications", "sub2", <BellOutlined />, [
+			getItem("Push", "1"),
+			getItem("Whatsapp", "2"),
+			getItem("Email", "3"),
 		]),
-		getItem("Team", "sub2", <TeamOutlined />, [
-			getItem("Team 1", "6"),
-			getItem("Team 2", "8"),
-		]),
-		getItem("Files", "9", <FileOutlined />),
-		getItem("Users", "10", <UserOutlined />),
+		getItem("Users", "4", <UserOutlined />),
 	];
 	return (
 		<>

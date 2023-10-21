@@ -33,3 +33,63 @@
 	display: flex;
 	justify-content: center;
 }
+
+.notification-wrapper {
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 500px;
+}
+
+.notification-wrapper .notification-title-content {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.notification-wrapper .notification-body-content {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.notification-wrapper .notification-title-content span {
+	color: #818181;
+	font-weight: 600;
+}
+
+.notification-wrapper .notification-body-content span {
+	color: #818181;
+	font-weight: 600;
+}
+
+.notification-wrapper .notification-content-button {
+	margin-top: 30px;
+}
+
+.notification-wrapper .notification-content-button button {
+	width: 100%;
+	background: #4f0386;
+	height: 42px;
+	color: white;
+	font-weight: 600;
+}
+.notification-wrapper .push-notification-content,
+.whatsapp-notification-content,
+.email-notification-content {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+@media screen and (max-width: 820px) {
+	.notification-wrapper {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 480px) {
+	.notification-wrapper {
+		width: 90%;
+	}
+}

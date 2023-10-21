@@ -33,6 +33,9 @@ const DrawerComponent = (props) => {
 		const UpdatedData = data;
 		setDataSource(UpdatedData);
 		openNotification("success", "User Updated Successfully");
+		setName("");
+		setStatus("");
+		setContact("");
 	};
 
 	return (
