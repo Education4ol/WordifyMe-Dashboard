@@ -83,13 +83,127 @@
 	gap: 16px;
 }
 
+.word-catergory-wrapper .word-category-input-btn-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: end;
+	gap: 10px;
+}
+
+.word-catergory-wrapper .word-category-cards-container {
+	margin-top: 50px;
+}
+
+.word-catergory-wrapper
+	.word-category-input-btn-container
+	.word-category-title-input {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	width: 40%;
+}
+.word-catergory-wrapper
+	.word-category-input-btn-container
+	.word-category-title-input
+	span {
+	color: #000000bd;
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.word-catergory-wrapper .word-category-input-btn-container button {
+	background: #4f0386;
+	color: white;
+	height: 38px;
+	border: none;
+}
+
+.word-catergory-wrapper .word-category-input-btn-container button:hover {
+	color: white;
+	cursor: pointer;
+}
+
+.word-category-card-wrapper {
+	display: flex;
+	width: 40%;
+	margin-top: 32px;
+	box-shadow: rgba(0, 0, 0, 0.35) 1.95px 1.95px 2.6px;
+	border-radius: 10px;
+	overflow: hidden;
+	height: 100%;
+	gap: 8px;
+}
+
+.word-category-card-wrapper .word-category-card-icon {
+	width: 30%;
+}
+
+.word-category-card-wrapper .word-category-card-icon img {
+	width: 100%;
+	height: 100%;
+}
+
+.word-category-card-wrapper .word-category-card-content {
+	padding-top: 8px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.word-category-card-wrapper .word-category-card-content span {
+	font-weight: 500;
+	font-size: 16px;
+	color: #505050de;
+}
+.word-category-card-wrapper
+	.word-category-card-content
+	.word-category-card-word-count {
+	padding: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.word-category-card-wrapper
+	.word-category-card-content
+	.word-category-card-word-count
+	button {
+	background: #4f0386;
+	color: white;
+}
 @media screen and (max-width: 820px) {
 	.notification-wrapper {
 		width: 50%;
 	}
+	.word-catergory-wrapper
+		.word-category-input-btn-container
+		.word-category-title-input {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		width: 60%;
+	}
+	.word-category-card-wrapper {
+		width: 60%;
+	}
 }
+
 @media screen and (max-width: 480px) {
 	.notification-wrapper {
 		width: 90%;
+	}
+
+	.word-catergory-wrapper
+		.word-category-input-btn-container
+		.word-category-title-input {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		width: 100%;
+	}
+	.word-category-card-wrapper {
+		width: 100%;
 	}
 }

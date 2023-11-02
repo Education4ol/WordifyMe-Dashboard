@@ -7,6 +7,7 @@ import { Breadcrumb, Layout, Menu, theme, Button, Input } from "antd";
 import NotificationComponent from "../../Components/NotificationComponent";
 import TableComponent from "../../Components/TableComponent";
 import DrawerComponent from "../../Components/DrawerComponent";
+import WordCategoryComponent from "../../Components/WordCategoryComponent";
 const { Header, Content, Footer } = Layout;
 
 ///////////////////////////////////////////////////////
@@ -162,6 +163,8 @@ const App = () => {
 							<NotificationComponent whatsapp={true} />
 						) : elementKey == 3 ? (
 							<NotificationComponent email={true} />
+						) : elementKey == 5 ? (
+							<WordCategoryComponent />
 						) : (
 							""
 						)}
