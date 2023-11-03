@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../../Components/sidebarComponent"; // Import the Sidebar component
+import Sidebar from "../../Components/SidebarComponent"; // Import the Sidebar component
 import data from "../../assets/data";
 import "./Profile.css";
 
@@ -8,6 +8,7 @@ import NotificationComponent from "../../Components/NotificationComponent";
 import TableComponent from "../../Components/TableComponent";
 import DrawerComponent from "../../Components/DrawerComponent";
 import WordCategoryComponent from "../../Components/WordCategoryComponent";
+import UserFeedback from "../../Components/UserFeedback";
 const { Header, Content, Footer } = Layout;
 
 ///////////////////////////////////////////////////////
@@ -165,6 +166,8 @@ const App = () => {
 							<NotificationComponent email={true} />
 						) : elementKey == 5 ? (
 							<WordCategoryComponent />
+						) : elementKey == 6 ? (
+							<UserFeedback />
 						) : (
 							""
 						)}

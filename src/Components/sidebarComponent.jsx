@@ -7,6 +7,7 @@ import {
 	LogoutOutlined,
 	BellOutlined,
 	FileWordOutlined,
+	MessageOutlined,
 } from "@ant-design/icons";
 import MenuComponent from "./MenuComponent";
 const Sidebar = (props) => {
@@ -27,6 +28,7 @@ const Sidebar = (props) => {
 		]),
 		getItem("Users", "4", <UserOutlined />),
 		getItem("Word Category", "5", <FileWordOutlined />),
+		getItem("User Feedback", "6", <MessageOutlined />),
 	];
 	return (
 		<>
