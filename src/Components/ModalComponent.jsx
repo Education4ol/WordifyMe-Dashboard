@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import img from "../assets/modal-icon.jpg";
-import { Collapse } from "antd";
-import DrawerComponent from "./DrawerComponent";
 
 import DrawerComp from "./Drawer.Component";
 import EditWordCategory from "./EditWordCategory";

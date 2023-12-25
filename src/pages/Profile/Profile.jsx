@@ -6,7 +6,7 @@ import axios from "axios";
 import { Breadcrumb, Layout, Menu, theme, Button, Input } from "antd";
 import NotificationComponent from "../../Components/NotificationComponent";
 import TableComponent from "../../Components/TableComponent";
-import DrawerComponent from "../../Components/DrawerComponent";
+
 import WordCategoryComponent from "../../Components/WordCategoryComponent";
 import UserFeedback from "../../Components/UserFeedback";
 import {

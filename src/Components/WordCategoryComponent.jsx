@@ -3,7 +3,7 @@ import WordCategoryCardComponent from "./WordCategoryCardComponent";
 import { Input, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import DrawerComponent from "./DrawerComponent";
+
 import { notification } from "antd";
 import DrawerComp from "./Drawer.Component";
 import AddWordCategory from "./AddWordCategory";
