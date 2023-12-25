@@ -1,8 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
-import { jwtDecode } from "jwt-decode";
+
 import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { LockOutlined } from "@ant-design/icons";

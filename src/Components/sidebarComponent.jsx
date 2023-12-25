@@ -8,6 +8,7 @@ import {
 	BellOutlined,
 	FileWordOutlined,
 	MessageOutlined,
+	HomeOutlined,
 } from "@ant-design/icons";
 import MenuComponent from "./MenuComponent";
 const Sidebar = (props) => {
@@ -21,14 +22,15 @@ const Sidebar = (props) => {
 		};
 	}
 	const items = [
+		getItem("Home", "1", <HomeOutlined />),
 		getItem("Notifications", "sub2", <BellOutlined />, [
-			getItem("Push", "1"),
-			getItem("Whatsapp", "2"),
-			getItem("Email", "3"),
+			getItem("Push", "2"),
+			getItem("Whatsapp", "3"),
+			getItem("Email", "4"),
 		]),
-		getItem("Users", "4", <UserOutlined />),
-		getItem("Word Category", "5", <FileWordOutlined />),
-		getItem("User Feedback", "6", <MessageOutlined />),
+		getItem("Users", "5", <UserOutlined />),
+		getItem("Word Category", "6", <FileWordOutlined />),
+		getItem("User Feedback", "7", <MessageOutlined />),
 	];
 	return (
 		<>

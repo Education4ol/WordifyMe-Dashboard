@@ -1,73 +1,78 @@
 /*Components Styles*/
 .modal-content-wrapper {
-  padding: 3px;
+	padding: 3px;
 }
 
 .modal-category-icon {
-  width: 100%;
-  height: 100px;
+	width: 100%;
+	height: 100px;
 }
 
 .modal-category-icon img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
 }
 
 .word-category-info-wrapper {
-  width: 100%;
-  display: flex;
-  gap: 10px;
+	width: 100%;
+	display: flex;
+	gap: 10px;
 }
 
 .word-category-info-wrapper .word-category-info-left {
-  width: 50%;
+	width: 50%;
 }
 
 .word-category-info-wrapper .word-category-info-right {
-  width: 50%;
+	width: 50%;
 }
 
 .word-category-info-wrapper p {
-  font-weight: 600;
-  color: #818181;
-  margin: 10px 0;
+	font-weight: 600;
+	color: #818181;
+	margin: 10px 0;
 }
 
 .words-list-wrapper {
-  max-height: 130px;
-  overflow-y: scroll;
-  padding: 10px;
-  overflow-x: hidden;
+	max-height: 130px;
+	overflow-y: scroll;
+	padding: 10px;
+	overflow-x: hidden;
 }
 
 .words-list {
-  display: flex;
-  width: 100%;
-  border-radius: 8px;
-  gap: 10px;
-  margin-bottom: 6px;
-  background: rgb(240, 239, 239);
+	display: flex;
+	width: 100%;
+	border-radius: 8px;
+	gap: 10px;
+	margin-bottom: 6px;
+	background: rgb(240, 239, 239);
 }
+
 .words-list p {
-  font-weight: 600;
-  color: #818181;
-  margin: 10px 0;
+	font-weight: 600;
+	color: #818181;
+	margin: 10px 0;
 }
 
 .words-list-img {
-  width: 25%;
+	width: 25%;
+}
+
+.words-list-img img {
+	width: 100%;
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+	width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: white;
+	background-color: white;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #4f0386;
-  border-radius: 2px;
+	background-color: #4f0386;
+	border-radius: 2px;
 }

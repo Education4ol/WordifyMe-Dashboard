@@ -1,9 +1,25 @@
-import React, { useState } from "react";
-import data from "../assets/FeedbackData";
+import React, { useEffect, useState } from "react";
+
 import { Button, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import axios from "axios";
+
 const UserFeedback = () => {
+	//UseStates for UserFeedback
 	const [searched, setSearched] = useState("");
+	const [feedbackData, setFeedBackData] = useState("");
+	//End of UseStates
+
+	useEffect(() => {
+		const getUserFeedback = async () => {
+			const feedback = await axios.get(
+				`${import.meta.env.VITE_BASE_URL}/userfeedback/`
+			);
+
+			setFeedBackData(feedback.data.data);
+		};
+		getUserFeedback();
+	}, []);
+
 	return (
 		<>
 			<div className="user-feedback-wrapper">
@@ -14,24 +30,27 @@ const UserFeedback = () => {
 					}}
 					placeholder="Search Here....."
 				/>
-				{data
-					.filter((item) => {
-						return searched.toLowerCase() == ""
-							? item
-							: item.first_name.toLowerCase().includes(searched.toLowerCase());
-					})
-					.map((item, index) => {
-						return (
-							<UserFeedbackCard
-								key={index}
-								image={item.image}
-								first_name={item.first_name}
-								message={item.message}
-								date={item.date}
-								time={item.time}
-							/>
-						);
-					})}
+				{feedbackData &&
+					feedbackData
+						.filter((item) => {
+							return searched.toLowerCase() == ""
+								? item
+								: item.first_name
+										.toLowerCase()
+										.includes(searched.toLowerCase());
+						})
+						.map((item, index) => {
+							return (
+								<UserFeedbackCard
+									key={index}
+									image={item.image}
+									name={item.name}
+									message={item.message}
+									date={item.date}
+									time={item.time}
+								/>
+							);
+						})}
 			</div>
 		</>
 	);
@@ -48,7 +67,7 @@ const UserFeedbackCard = (props) => {
 				</div>
 
 				<div className="user-feedback-card-content">
-					<span>{props.first_name}</span>
+					<span>{props.name}</span>
 					<div className="user-feedback-card-content-date-time">
 						<span>{props.time}</span>
 						&nbsp; | &nbsp;
