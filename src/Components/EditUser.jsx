@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Input, Button } from "antd";
+import { notification } from "antd";
 import axios from "axios";
 const EditUser = (props) => {
+	const [api, contextHolder] = notification.useNotification();
 	//Notifications
 	const openNotification = (type, message) => {
 		api[type]({
@@ -47,7 +49,7 @@ const EditUser = (props) => {
 
 	const handleSave = async () => {
 		const response = await axios.post(
-			`${import.meta.env.VITE_BASE_URL}/users/${props.editData._id}`,
+			`${import.meta.env.VITE_LOCAL_URL}/users/${props.editData._id}`,
 			data
 		);
 		if (response) {
@@ -55,43 +57,47 @@ const EditUser = (props) => {
 		}
 	};
 	///End of Functions
+
 	return (
-		<div className="drawer-content-wrapper">
-			<div className="drawer-content-edit">
-				<label htmlFor="name"> Name</label>
-				<Input
-					placeholder={props.editData.name}
-					id="name"
-					name="name"
-					onChange={(e) => editUserName(e)}
-				/>
+		<>
+			{contextHolder}
+			<div className="drawer-content-wrapper">
+				<div className="drawer-content-edit">
+					<label htmlFor="name"> Name</label>
+					<Input
+						placeholder={props.editData.name}
+						id="name"
+						name="name"
+						onChange={(e) => editUserName(e)}
+					/>
+				</div>
+				<div className="drawer-content-edit">
+					<label htmlFor="contact"> Contact</label>
+					<Input
+						placeholder={props.editData.contact}
+						id="contact"
+						name="contact"
+						onChange={(e) => editUserContact(e)}
+					/>
+				</div>
+				<div className="drawer-content-edit">
+					<label htmlFor="status">Status</label>
+					<Input
+						placeholder={props.editData.status}
+						id="status"
+						name="status"
+						onKeyUp={(e) => {
+							setStatus(e.target.value);
+						}}
+					/>
+				</div>
+				<div className="drawer-content-edit-button">
+					<Button type="primary" onClick={handleSave}>
+						Save
+					</Button>
+				</div>
 			</div>
-			<div className="drawer-content-edit">
-				<label htmlFor="contact"> Contact</label>
-				<Input
-					placeholder={props.editData.contact}
-					id="contact"
-					name="contact"
-					onChange={(e) => editUserContact(e)}
-				/>
-			</div>
-			<div className="drawer-content-edit">
-				<label htmlFor="status">Status</label>
-				<Input
-					placeholder={props.editData.status}
-					id="status"
-					name="status"
-					onKeyUp={(e) => {
-						setStatus(e.target.value);
-					}}
-				/>
-			</div>
-			<div className="drawer-content-edit-button">
-				<Button type="primary" onClick={handleSave}>
-					Save
-				</Button>
-			</div>
-		</div>
+		</>
 	);
 };
 

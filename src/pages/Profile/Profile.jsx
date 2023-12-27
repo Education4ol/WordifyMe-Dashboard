@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../Components/SidebarComponent"; // Import the Sidebar component
-import data from "../../assets/data";
 import "./Profile.css";
 import axios from "axios";
 import { Breadcrumb, Layout, Menu, theme, Button, Input } from "antd";

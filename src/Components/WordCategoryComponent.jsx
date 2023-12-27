@@ -11,8 +11,8 @@ import AddWordCategory from "./AddWordCategory";
 ///Notification////
 const WordCategoryComponent = () => {
 	const openNotification = (type, message) => {
-		api["success"]({
-			message: "Success",
+		api[type]({
+			message: type,
 			description: message,
 
 			duration: 3,
@@ -42,47 +42,44 @@ const WordCategoryComponent = () => {
 		],
 	});
 	const [UpdateCategory, setUpdateCategory] = useState([{}]);
-
+	//UseEffect//
 	useEffect(() => {
 		const getWordCategories = async () => {
 			const categories = await axios.get(
-				`${import.meta.env.VITE_BASE_URL}/wordcategory`
+				`${import.meta.env.VITE_LOCAL_URL}/wordcategory`
 			);
 			setWordCategoryData(categories.data.data.wordCategories);
 		};
 		getWordCategories();
 	}, []);
-
+	////////////
 	const triggerDrawer = () => {
 		setOpenDrawer(true);
 	};
 
-	const onSaveEdit = async () => {
-		const res = await axios.post(
-			`${import.meta.env.VITE_BASE_URL}/wordcategory/update`,
-			{}
-		);
-	};
-
 	const onSave = async () => {
-		const res = await axios.post(
-			`${import.meta.env.VITE_BASE_URL}/wordcategory/create`,
-			addCategory
-		);
-		if (res.status == 200) {
-			openNotification("success", res.data.message);
-			const getWordCategories = async () => {
-				const categories = await axios.get(
-					`${import.meta.env.VITE_BASE_URL}/wordcategory`
-				);
-				setWordCategoryData(categories.data.data.wordCategories);
-			};
-			getWordCategories();
+		if (addCategory.name) {
+			const res = await axios.post(
+				`${import.meta.env.VITE_LOCAL_URL}/wordcategory/create`,
+				addCategory
+			);
+			if (res.status == 200) {
+				openNotification("success", res.data.message);
+				const getWordCategories = async () => {
+					const categories = await axios.get(
+						`${import.meta.env.VITE_LOCAL_URL}/wordcategory`
+					);
+					setWordCategoryData(categories.data.data.wordCategories);
+				};
+				getWordCategories();
+			}
+		} else {
+			openNotification("error", "Atleast Name is Required");
 		}
 	};
 	const deleteCategory = async (id) => {
 		const res = await axios.post(
-			`${import.meta.env.VITE_BASE_URL}/wordcategory/delete`,
+			`${import.meta.env.VITE_LOCAL_URL}/wordcategory/delete`,
 			{
 				_id: id,
 			}
@@ -91,7 +88,7 @@ const WordCategoryComponent = () => {
 			openNotification("success", res.data.message);
 			const getWordCategories = async () => {
 				const categories = await axios.get(
-					`${import.meta.env.VITE_BASE_URL}/wordcategory`
+					`${import.meta.env.VITE_LOCAL_URL}/wordcategory`
 				);
 				setWordCategoryData(categories.data.data.wordCategories);
 			};
@@ -137,9 +134,9 @@ const WordCategoryComponent = () => {
 											item={item}
 											UpdateCategory={UpdateCategory}
 											setUpdateCategory={setUpdateCategory}
-											onSaveEdit={onSaveEdit}
 											setRemoveCategory={setRemoveCategory}
 											onDelete={deleteCategory}
+											setWordCategoryData={setWordCategoryData}
 										/>
 									);
 								})

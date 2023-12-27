@@ -48,6 +48,11 @@ const AddWordCategory = (props) => {
 		data[index].isKnown = e.target.value;
 	};
 
+	const setImage = (e, index) => {
+		const data = [...wordList];
+		data[index].Image = e.target.value;
+	};
+
 	const setWord = (e, index) => {
 		const data = [...wordList];
 		data[index].word = e.target.value;
@@ -85,6 +90,7 @@ const AddWordCategory = (props) => {
 					<Input
 						placeholder="Category Name"
 						id="category_name"
+						required={true}
 						name="category_name"
 						onChange={(e) => {
 							setCategoryName(e.target.value);
@@ -95,6 +101,7 @@ const AddWordCategory = (props) => {
 					<label htmlFor="total_words">Total Words</label>
 					<Input
 						placeholder="Total words"
+						required={true}
 						id="total_words"
 						name="total_words"
 						onChange={(e) => {
@@ -151,6 +158,7 @@ const AddWordCategory = (props) => {
 							<Input
 								key={index}
 								placeholder={tag}
+								required={true}
 								id="total_words"
 								name="total_words"
 								onChange={(e) => handleTahNameChange(e, index)}
@@ -172,10 +180,10 @@ const AddWordCategory = (props) => {
 											<div className="drawer-content-edit">
 												<label htmlFor="image">Image</label>
 												<Input
-													id="isKnown"
-													name="isKnown"
+													id="image"
+													name="image"
 													onChange={(e) => {
-														setIsKnown(e, index);
+														setImage(e, index);
 													}}
 												/>
 											</div>
@@ -183,6 +191,7 @@ const AddWordCategory = (props) => {
 												<label htmlFor="isKnown">is Known</label>
 												<Input
 													id="isKnown"
+													required={true}
 													name="isKnown"
 													onChange={(e) => {
 														setIsKnown(e, index);
@@ -193,6 +202,7 @@ const AddWordCategory = (props) => {
 												<label htmlFor="word">Word</label>
 												<Input
 													id="word"
+													required={true}
 													name="word"
 													onChange={(e) => {
 														setWord(e, index);
@@ -203,6 +213,7 @@ const AddWordCategory = (props) => {
 										<label htmlFor="useCase">Use Case</label>
 										<Input
 											id="useCase"
+											required={true}
 											name="useCase"
 											onChange={(e) => {
 												setUseCase(e, index);
@@ -211,6 +222,7 @@ const AddWordCategory = (props) => {
 										<label htmlFor="meaning">Meaning</label>
 										<Input
 											id="meaning"
+											required={true}
 											name="meaning"
 											onChange={(e) => setMeaning(e, index)}
 										/>

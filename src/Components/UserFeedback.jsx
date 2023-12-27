@@ -12,7 +12,7 @@ const UserFeedback = () => {
 	useEffect(() => {
 		const getUserFeedback = async () => {
 			const feedback = await axios.get(
-				`${import.meta.env.VITE_BASE_URL}/userfeedback/`
+				`${import.meta.env.VITE_LOCAL_URL}/userfeedback/`
 			);
 
 			setFeedBackData(feedback.data.data);

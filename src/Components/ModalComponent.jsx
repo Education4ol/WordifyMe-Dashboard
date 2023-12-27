@@ -16,7 +16,11 @@ const ModalComponent = (props) => {
 				onCancel={props.handleCancel}
 				footer={[
 					<Button onClick={() => setOpenDrawer(true)}>Edit Category</Button>,
-					<Button onClick={() => props.onDelete(props.item._id)}>
+					<Button
+						onClick={() => {
+							props.onDelete(props.item._id), props.handleCancel;
+						}}
+					>
 						Delete Category
 					</Button>,
 				]}
@@ -68,6 +72,7 @@ const ModalComponent = (props) => {
 					UpdateCategory={props.UpdateCategory}
 					setUpdateCategory={props.setUpdateCategory}
 					onSaveEdit={props.onSaveEdit}
+					setWordCategoryData={props.setWordCategoryData}
 				/>
 			</DrawerComp>
 		</>
