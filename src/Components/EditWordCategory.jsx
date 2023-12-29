@@ -1,9 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
+
+import { Modal, Space } from "antd";
 import { Input, Button, Select } from "antd";
 import { notification } from "antd";
 import axios from "axios";
+///Confirm Modal
+
+const ReachableContext = createContext(null);
+const UnreachableContext = createContext(null);
+const config = {
+  title: "Confirm Edit!",
+  content: (
+    <>
+      <ReachableContext.Consumer>
+        {(name) => `Reachable: ${name}!`}
+      </ReachableContext.Consumer>
+      <br />
+      <UnreachableContext.Consumer>
+        {(name) => `Unreachable: ${name}!`}
+      </UnreachableContext.Consumer>
+    </>
+  ),
+};
+
+//
 
 const EditWordCategory = (props) => {
+  const [modal, contextholder] = Modal.useModal();
   const [api, contextHolder] = notification.useNotification();
   ///Notification////
   const openNotification = (type, message) => {
@@ -26,7 +49,7 @@ const EditWordCategory = (props) => {
   useEffect(() => {
     setEditWordList(props.category.wordsList);
     setEditTags(props.category.tags);
-    setCategoryDetails(props.category);
+    // setCategoryDetails(props.category);
   }, []);
 
   /////////////
@@ -53,29 +76,31 @@ const EditWordCategory = (props) => {
   ///
   const editCategoryName = (e) => {
     if (e.target.value != "") {
-      const data = [{ ...props.category, name: e.target.value }];
+      const data = { ...categoryDetails, name: e.target.value };
+
       setCategoryDetails(data);
     }
   };
 
   const editTotalWords = (e) => {
-    const data = [{ ...props.category, totalWords: e.target.value }];
+    const data = { ...categoryDetails, totalWords: e.target.value };
+
     setCategoryDetails(data);
   };
 
   const editIsPremium = (value) => {
-    const data = [{ ...props.category, isPremium: value }];
+    const data = { ...categoryDetails, isPremium: value };
     setCategoryDetails(data);
   };
 
   const editIsCompleted = (value) => {
-    const data = [{ ...props.category, isCompleted: value }];
+    const data = { ...categoryDetails, isCompleted: value };
+    setCategoryDetails(data);
   };
 
   const addTags = () => {
-    const data = [...editTags, "tagname"];
-    setEditTags(data);
-    console.log(editTags);
+    const tags = [...editTags, "tagname"];
+    setEditTags(tags);
   };
   const handleEditTagName = (e, index) => {
     const data = [...editTags];
@@ -122,10 +147,13 @@ const EditWordCategory = (props) => {
 
   const onConfirmEdit = () => {
     const data = {
-      ...categoryDetails,
+      name: categoryDetails.name,
+      likes: categoryDetails.likes,
+      totalWords: categoryDetails.totalWords,
       tags: editTags,
       wordsList: editWordList,
     };
+
     setCategoryDetails(data);
     console.log(data);
   };

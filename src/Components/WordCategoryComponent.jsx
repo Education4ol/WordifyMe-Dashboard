@@ -156,7 +156,11 @@ const WordCategoryComponent = () => {
         setOpenDrawer={setOpenDrawer}
         title="Add Category"
       >
-        <AddWordCategory onSave={onSave} setAddCategory={setAddCategory} />
+        <AddWordCategory
+          onSave={onSave}
+          setAddCategory={setAddCategory}
+          addCategory={addCategory}
+        />
       </DrawerComp>
     </>
   );

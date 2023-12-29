@@ -49,7 +49,7 @@ const EditUser = (props) => {
 
   const handleSave = async () => {
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/users/${props.editData._id}`,
+      `${import.meta.env.VITE_BASE_URL}/backendUsers/${props.editData._id}`,
       data
     );
     if (response) {
