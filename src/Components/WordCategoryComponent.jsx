@@ -14,7 +14,6 @@ const WordCategoryComponent = () => {
     api[type]({
       message: type,
       description: message,
-
       duration: 3,
     });
   };
@@ -143,14 +142,7 @@ const WordCategoryComponent = () => {
             : "No data to display"}
         </div>
       </div>
-      {/* <DrawerComponent
-        addCategory={addCategory}
-        openDrawer={openDrawer}
-        setOpenDrawer={setOpenDrawer}
-        setAddCategory={setAddCategory}
-        newCategory={true}
-        onSave={onSave}
-      /> */}
+
       <DrawerComp
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}

@@ -1,56 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../Components/SidebarComponent"; // Import the Sidebar component
 import "./Profile.css";
-import axios from "axios";
-import { Breadcrumb, Layout, Menu, theme, Button, Input } from "antd";
+import { Breadcrumb, Layout, theme } from "antd";
 import NotificationComponent from "../../Components/NotificationComponent";
-import TableComponent from "../../Components/TableComponent";
-
 import WordCategoryComponent from "../../Components/WordCategoryComponent";
 import UserFeedback from "../../Components/UserFeedback";
-import {
-  UndoOutlined,
-  UserOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
-import DrawerComp from "../../Components/Drawer.Component";
-import EditUser from "../../Components/EditUser";
+import { UserOutlined, NotificationOutlined } from "@ant-design/icons";
 import HomePage from "../HomePage";
+import UserComp from "../../Components/UserComp";
 const { Header, Content, Footer } = Layout;
 
 ///////////////////////////////////////////////////////
 const App = () => {
+  ////////States///////////////////////////
   const [collapsed, setCollapsed] = useState(false);
   const [elementKey, setElementKey] = useState("");
 
-  ////////States///////////////////////////
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [editData, setEditData] = useState("");
-  const [searched, setSearched] = useState("");
-  const [dataSource, setDataSource] = useState([]);
-  ////////End of States/////////////////////
-
-  const handleRefresh = () => {
-    setSearched("");
-  };
-  useEffect(() => {
-    const getData = async () => {
-      const data = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/`);
-      console.log(data.data.users);
-      const userData = data.data.users;
-      setDataSource(userData);
-    };
-    getData();
-  }, []);
-
-  const onClose = () => {
-    setOpenDrawer(false);
-  };
-
-  const handelEdit = (record) => {
-    setEditData(record);
-    setOpenDrawer(true);
-  };
   /////////////////////////////////////////////////////
 
   const {
@@ -58,74 +23,6 @@ const App = () => {
   } = theme.useToken();
 
   ////////////Fetching users////////////////////////////
-
-  const columns = [
-    {
-      title: "Users",
-      dataIndex: "name",
-      key: "name",
-      render: (text, record) => (
-        <div className="username-profile-img-container">
-          <img
-            src={record.profileImage}
-            alt={text}
-            style={{ width: "50px", marginRight: "10px" }}
-          />
-          {text}
-        </div>
-      ),
-      filteredValue: [searched],
-      onFilter: (value, record) => {
-        return (
-          String(record.name).toLowerCase().includes(value.toLowerCase()) ||
-          String(record.contact).toLowerCase().includes(value.toLowerCase()) ||
-          String(record.status).toLowerCase().includes(value.toLowerCase())
-        );
-      },
-      shouldCellUpdate: (prevRecord, nextRecord) =>
-        prevRecord.name !== nextRecord.name,
-    },
-    {
-      title: "Conatact No",
-      dataIndex: "contact",
-      key: "contact",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (text) => (
-        <div
-          style={{
-            fontWeight: "600",
-            color: text === "paid" ? "green" : "red",
-          }}
-        >
-          {text}
-        </div>
-      ),
-    },
-    {
-      title: "Joining Date",
-      dataIndex: "createdAt",
-      key: "createdAt",
-    },
-
-    {
-      title: "",
-      dataIndex: "action",
-      key: "_id",
-      render: (text, record) => (
-        <Button
-          onClick={() => {
-            handelEdit(record);
-          }}
-        >
-          Edit
-        </Button>
-      ),
-    },
-  ];
 
   //////////////////////////////////////////////////////
   ////////////////Function to toggle Content//////////////////////
@@ -210,20 +107,7 @@ const App = () => {
             {elementKey == 1 ? (
               <HomePage />
             ) : elementKey == 5 ? (
-              <div>
-                <Input
-                  placeholder="Search Here....."
-                  onChange={(e) => {
-                    setSearched(e.target.value);
-                  }}
-                  style={{ width: "50%", marginBottom: 10 }}
-                />
-                &nbsp;&nbsp;
-                <Button icon={<UndoOutlined />} onClick={handleRefresh}>
-                  refresh
-                </Button>
-                <TableComponent columns={columns} dataSource={dataSource} />
-              </div>
+              <UserComp />
             ) : elementKey == 2 ? (
               <NotificationComponent push={true} />
             ) : elementKey == 3 ? (
@@ -238,11 +122,6 @@ const App = () => {
               ""
             )}
           </div>
-          {/* Drawer Component */}
-          <DrawerComp openDrawer={openDrawer} setOpenDrawer={setOpenDrawer}>
-            <EditUser editData={editData} />
-          </DrawerComp>
-          ;
         </Content>
 
         <Footer

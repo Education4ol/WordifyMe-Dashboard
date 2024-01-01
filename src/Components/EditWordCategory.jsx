@@ -1,26 +1,24 @@
-import React, { useEffect, useState, createContext } from "react";
-
+import React, { useEffect, useState } from "react";
+import { useRef } from "react";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 import { Modal, Space } from "antd";
 import { Input, Button, Select } from "antd";
 import { notification } from "antd";
 import axios from "axios";
+const { confirm } = Modal;
+
 ///Confirm Modal
 
-const ReachableContext = createContext(null);
-const UnreachableContext = createContext(null);
-const config = {
-  title: "Confirm Edit!",
-  content: (
-    <>
-      <ReachableContext.Consumer>
-        {(name) => `Reachable: ${name}!`}
-      </ReachableContext.Consumer>
-      <br />
-      <UnreachableContext.Consumer>
-        {(name) => `Unreachable: ${name}!`}
-      </UnreachableContext.Consumer>
-    </>
-  ),
+const showConfirm = (data, setState) => {
+  confirm({
+    title: "Do you Want to Edit the Word Category",
+    icon: <ExclamationCircleFilled />,
+    content: <Space></Space>,
+    onOk() {
+      setState(data);
+    },
+    onCancel() {},
+  });
 };
 
 //
@@ -28,6 +26,7 @@ const config = {
 const EditWordCategory = (props) => {
   const [modal, contextholder] = Modal.useModal();
   const [api, contextHolder] = notification.useNotification();
+  const ref = useRef(null);
   ///Notification////
   const openNotification = (type, message) => {
     api["success"]({
@@ -49,12 +48,12 @@ const EditWordCategory = (props) => {
   useEffect(() => {
     setEditWordList(props.category.wordsList);
     setEditTags(props.category.tags);
-    // setCategoryDetails(props.category);
+    setCategoryDetails(props.category);
   }, []);
 
   /////////////
 
-  ///OnSaveFunction///
+  ///OnClick Functions///
   const onSaveEdit = async () => {
     const res = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/wordcategory/update/${
@@ -62,7 +61,7 @@ const EditWordCategory = (props) => {
       }`,
       categoryDetails
     );
-    console.log(res);
+
     openNotification("Success", res.data.message);
     const getWordCategories = async () => {
       const categories = await axios.get(
@@ -71,6 +70,17 @@ const EditWordCategory = (props) => {
       props.setWordCategoryData(categories.data.data.wordCategories);
     };
     getWordCategories();
+  };
+
+  const onConfirmEdit = () => {
+    const data = {
+      name: categoryDetails.name,
+      likes: categoryDetails.likes,
+      totalWords: categoryDetails.totalWords,
+      tags: editTags,
+      wordsList: editWordList,
+    };
+    showConfirm(data, setCategoryDetails);
   };
   ///END/////////////
   ///
@@ -145,18 +155,6 @@ const EditWordCategory = (props) => {
     data[index].meaning = e.target.value;
   };
 
-  const onConfirmEdit = () => {
-    const data = {
-      name: categoryDetails.name,
-      likes: categoryDetails.likes,
-      totalWords: categoryDetails.totalWords,
-      tags: editTags,
-      wordsList: editWordList,
-    };
-
-    setCategoryDetails(data);
-    console.log(data);
-  };
   //End of Functions
   return (
     <>
@@ -167,6 +165,7 @@ const EditWordCategory = (props) => {
           <Input
             placeholder={props.category.name}
             id="category_name"
+            ref={ref}
             name="category_name"
             onChange={(e) => {
               editCategoryName(e);

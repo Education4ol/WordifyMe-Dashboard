@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
-
 import { Button, Input } from "antd";
 import axios from "axios";
-
+import DrawerComp from "./Drawer.Component";
+import { notification } from "antd";
 const UserFeedback = () => {
+  //Notification//
+  const openNotification = (type, message) => {
+    api[type]({
+      message: type,
+      description: message,
+      duration: 3,
+    });
+  };
+  //
+  const { TextArea } = Input;
   //UseStates for UserFeedback
   const [searched, setSearched] = useState("");
   const [feedbackData, setFeedBackData] = useState("");
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [UserEmail, setUserEmail] = useState({});
+  const [message, setMessage] = useState();
+  const [subject, setSubject] = useState();
+  const [api, contextHolder] = notification.useNotification();
   //End of UseStates
 
   useEffect(() => {
@@ -19,6 +34,27 @@ const UserFeedback = () => {
     };
     getUserFeedback();
   }, []);
+  ///Hooks//
+  const handleSendMail = async () => {
+    if (UserEmail && message && subject) {
+      const data = {
+        email: UserEmail,
+        message: message,
+        subject: subject,
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/userFeedback/reply`,
+        data
+      );
+      console.log(res);
+      res.status == 200
+        ? openNotification("success", res.data.message)
+        : openNotification("error", "Mail not Sent");
+    } else {
+      openNotification("error", "Mail not Sent");
+    }
+  };
 
   return (
     <>
@@ -48,9 +84,58 @@ const UserFeedback = () => {
                   message={item.message}
                   date={item.date}
                   time={item.time}
+                  email={item.email}
+                  openDrawer={openDrawer}
+                  setOpenDrawer={setOpenDrawer}
+                  setUserEmail={setUserEmail}
                 />
               );
             })}
+        <DrawerComp openDrawer={openDrawer} setOpenDrawer={setOpenDrawer}>
+          {UserEmail ? (
+            ""
+          ) : (
+            <div
+              style={{
+                padding: "8px",
+                background: "rgba(252, 65, 65, 0.644)",
+                margin: "10px",
+                borderRadius: "4px",
+                color: "white",
+              }}
+            >
+              Note : User has no Email address , Email will not be sent
+            </div>
+          )}
+          {contextHolder}
+          <div className="drawer-content-wrapper">
+            <div className="drawer-content-edit">
+              <label htmlFor="subject">Subject</label>
+              <TextArea
+                placeholder="Subject"
+                autoSize={{ minRows: 2, maxRows: 3 }}
+                onChange={(e) => {
+                  setSubject(e.target.value);
+                }}
+              />
+            </div>
+            <div className="drawer-content-edit">
+              <label htmlFor="total_words">Message</label>
+              <TextArea
+                placeholder="Email Body"
+                autoSize={{ minRows: 4, maxRows: 8 }}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </div>
+            <div className="notification-content-button">
+              <Button type="primary" onClick={handleSendMail}>
+                Send Mail
+              </Button>
+            </div>
+          </div>
+        </DrawerComp>
       </div>
     </>
   );
@@ -79,7 +164,15 @@ const UserFeedbackCard = (props) => {
 
           <div className="user-feedback-card-buttons">
             <Button type="text">User Details </Button>
-            <Button type="text">Reply</Button>
+            <Button
+              type="text"
+              onClick={() => {
+                props.setOpenDrawer(true);
+                props.setUserEmail(props.email);
+              }}
+            >
+              Reply
+            </Button>
           </div>
         </div>
       </div>
