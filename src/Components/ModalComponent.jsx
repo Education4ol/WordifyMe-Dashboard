@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
-import img from "../assets/modal-icon.jpg";
-
 import DrawerComp from "./Drawer.Component";
 import EditWordCategory from "./EditWordCategory";
 const ModalComponent = (props) => {
@@ -27,7 +25,7 @@ const ModalComponent = (props) => {
       >
         <div className="modal-content-wrapper">
           <div className="modal-category-icon">
-            <img src={img} alt="icon" />
+            <img src={props.item.image} alt="icon" />
           </div>
           <div className="word-category-info-wrapper">
             <div className="word-category-info-left">

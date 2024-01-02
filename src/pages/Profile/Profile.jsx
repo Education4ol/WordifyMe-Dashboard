@@ -5,7 +5,7 @@ import { Breadcrumb, Layout, theme } from "antd";
 import NotificationComponent from "../../Components/NotificationComponent";
 import WordCategoryComponent from "../../Components/WordCategoryComponent";
 import UserFeedback from "../../Components/UserFeedback";
-import { UserOutlined, NotificationOutlined } from "@ant-design/icons";
+import { BellFilled } from "@ant-design/icons";
 import HomePage from "../HomePage";
 import UserComp from "../../Components/UserComp";
 const { Header, Content, Footer } = Layout;
@@ -61,29 +61,56 @@ const App = () => {
           >
             <div
               style={{
-                display: "flex",
-                border: "1px #4f0386 solid",
-                borderRadius: "50%",
-                height: "45px",
-                width: "45px",
-                alignItems: "center",
-                justifyContent: "center",
+                height: "40px",
+                width: "60px",
+                borderRight: "2px solid #818181",
               }}
             >
-              <NotificationOutlined />
+              <div
+                style={{
+                  display: "flex",
+
+                  borderRadius: "50%",
+                  height: "40px",
+                  width: "40px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(255, 0, 0, 0.199)",
+                }}
+              >
+                <BellFilled style={{ color: "rgb(218, 8, 8)" }} />
+              </div>
             </div>
             <div
               style={{
                 display: "flex",
-                border: "1px #4f0386 solid",
-                borderRadius: "50%",
-                height: "45px",
-                width: "45px",
+                gap: "12px",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <UserOutlined />
+              <div
+                style={{
+                  display: "flex",
+                  marginLeft: "5px",
+                  borderRadius: "50%",
+                  height: "40px",
+                  width: "40px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                  gap: "4px",
+                }}
+              >
+                <img
+                  src="https://imgs.search.brave.com/9sVeCtcqC_h7ybwv92UxNIOgdDNzBR_xJRITZrWDlvU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by95/b3VuZy1iZWFyZGVk/LW1hbi13aXRoLXN0/cmlwZWQtc2hpcnRf/MjczNjA5LTU2Nzcu/anBnP3NpemU9NjI2/JmV4dD1qcGc"
+                  alt="user logo"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <span style={{ color: "#818181", fontWeight: 500 }}>
+                UserName
+              </span>
             </div>
           </div>
         </Header>

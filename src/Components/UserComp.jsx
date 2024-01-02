@@ -128,8 +128,19 @@ const UserComp = () => {
           centered
           open={modal2Open}
           onOk={() => setModal2Open(false)}
-          onCancel={() => setModal2Open(false)}
-          cancelText="Edit"
+          onCancel={() => {
+            setModal2Open(false);
+          }}
+          footer={
+            <Button
+              onClick={() => {
+                setEditData(viewData);
+                setOpenDrawer(true);
+              }}
+            >
+              Edit
+            </Button>
+          }
         >
           <ViewUsers viewData={viewData} />
         </Modal>

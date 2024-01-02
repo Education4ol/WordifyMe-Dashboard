@@ -26,7 +26,7 @@ const showConfirm = (data, setState) => {
 const EditWordCategory = (props) => {
   const [modal, contextholder] = Modal.useModal();
   const [api, contextHolder] = notification.useNotification();
-  const ref = useRef(null);
+
   ///Notification////
   const openNotification = (type, message) => {
     api["success"]({
@@ -77,6 +77,7 @@ const EditWordCategory = (props) => {
       name: categoryDetails.name,
       likes: categoryDetails.likes,
       totalWords: categoryDetails.totalWords,
+      image: categoryDetails.image,
       tags: editTags,
       wordsList: editWordList,
     };
@@ -165,7 +166,6 @@ const EditWordCategory = (props) => {
           <Input
             placeholder={props.category.name}
             id="category_name"
-            ref={ref}
             name="category_name"
             onChange={(e) => {
               editCategoryName(e);
@@ -187,7 +187,7 @@ const EditWordCategory = (props) => {
           <div className="drawer-content-edit">
             <label htmlFor="premium">Premium</label>
             <Select
-              defaultValue={false}
+              defaultValue={props.category.isPremium}
               style={{
                 width: 120,
               }}
@@ -207,7 +207,7 @@ const EditWordCategory = (props) => {
           <div className="drawer-content-edit">
             <label htmlFor="completed">Completed</label>
             <Select
-              defaultValue={false}
+              defaultValue={props.category.isCompleted}
               style={{
                 width: 120,
               }}
@@ -222,6 +222,20 @@ const EditWordCategory = (props) => {
                   label: "True",
                 },
               ]}
+            />
+          </div>
+          <div className="drawer-content-edit">
+            <label htmlFor="completed">Category Image</label>
+            <Input
+              placeholder={props.category.image}
+              id="category_image"
+              name="category_image"
+              onChange={(e) => {
+                setCategoryDetails({
+                  ...categoryDetails,
+                  image: e.target.value,
+                });
+              }}
             />
           </div>
         </div>

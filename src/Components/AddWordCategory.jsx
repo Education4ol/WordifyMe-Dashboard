@@ -1,5 +1,19 @@
 import React, { useState } from "react";
-import { Input, Button, Select } from "antd";
+import { Input, Button, Select, Space, Modal } from "antd";
+import { ExclamationCircleFilled } from "@ant-design/icons";
+const { confirm } = Modal;
+
+const showConfirm = (data, setState) => {
+  confirm({
+    title: "Do you Want to Add the Word Category",
+    icon: <ExclamationCircleFilled />,
+    content: <Space></Space>,
+    onOk() {
+      setState(data);
+    },
+    onCancel() {},
+  });
+};
 const AddWordCategory = (props) => {
   //State
   const [categoryName, setCategoryName] = useState("");
@@ -7,6 +21,7 @@ const AddWordCategory = (props) => {
   const [premium, setPremium] = useState();
   const [totalWords, setTotalWords] = useState();
   const [tagName, setTagName] = useState(["tagname"]);
+  const [image, SetImage] = useState("");
   const [wordList, setWordList] = useState([
     {
       isKnown: "",
@@ -78,16 +93,17 @@ const AddWordCategory = (props) => {
   };
 
   const onConfirm = () => {
-    props.setAddCategory({
+    const data = {
       name: categoryName,
       isCompleted: completed,
       isPremium: premium,
+      image: image,
       likes: "",
       totalWords: totalWords,
       tags: tagName,
       wordsList: wordList,
-    });
-    console.log(props.addCategory);
+    };
+    showConfirm(data, props.setAddCategory);
   };
 
   //END
@@ -158,6 +174,17 @@ const AddWordCategory = (props) => {
                   label: "True",
                 },
               ]}
+            />
+          </div>
+          <div className="drawer-content-edit">
+            <label htmlFor="completed">Category Image</label>
+            <Input
+              placeholder="Category Image"
+              id="category_image"
+              name="category_image"
+              onChange={(e) => {
+                SetImage(e.target.value);
+              }}
             />
           </div>
         </div>

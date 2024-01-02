@@ -28,6 +28,7 @@ const WordCategoryComponent = () => {
     isCompleted: "",
     isPremium: false,
     likes: "",
+    image: "",
     totalWords: "",
     tags: ["tag_name"],
     wordsList: [
@@ -126,7 +127,7 @@ const WordCategoryComponent = () => {
                 .map((item, index) => {
                   return (
                     <WordCategoryCardComponent
-                      icon={item.icon}
+                      image={item.image}
                       key={index}
                       name={item.name}
                       wordlist={item.wordsList}
