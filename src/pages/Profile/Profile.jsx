@@ -14,7 +14,7 @@ const { Header, Content, Footer } = Layout;
 const App = () => {
   ////////States///////////////////////////
   const [collapsed, setCollapsed] = useState(false);
-  const [elementKey, setElementKey] = useState("");
+  const [elementKey, setElementKey] = useState("1");
 
   /////////////////////////////////////////////////////
 
