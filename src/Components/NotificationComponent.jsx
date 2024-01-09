@@ -5,6 +5,9 @@ const NotificationComponent = (props) => {
   //States//
 
   const [options, setOptions] = useState();
+  const [emails, setEmails] = useState([]);
+  const [emailSubject, setEmailSubject] = useState();
+  const [emailBody, setEmailBody] = useState();
   //
   //fETCTHING uSERS//
   useEffect(() => {
@@ -23,8 +26,18 @@ const NotificationComponent = (props) => {
     getData();
   }, []);
 
+  const sendBulkMail = async () => {
+    const res = await axios.post("http://localhost:8082/v1/notification/bulk", {
+      emails,
+      emailSubject,
+      emailBody,
+    });
+    console.log(res);
+  };
+
   const handleChange = (value) => {
-    console.log(`Selected: ${value}`);
+    setEmails(value);
+    console.log(value);
   };
 
   const { TextArea } = Input;
@@ -89,6 +102,9 @@ const NotificationComponent = (props) => {
               <TextArea
                 placeholder="Subject"
                 autoSize={{ minRows: 2, maxRows: 3 }}
+                onChange={(e) => {
+                  setEmailSubject(e.target.value);
+                }}
               />
             </div>
             <div className="notification-body-content">
@@ -96,11 +112,14 @@ const NotificationComponent = (props) => {
               <TextArea
                 placeholder="Email Body"
                 autoSize={{ minRows: 4, maxRows: 8 }}
+                onChange={(e) => {
+                  setEmailBody(e.target.value);
+                }}
               />
             </div>
           </div>
           <div className="notification-content-button">
-            <Button>Send Email</Button>
+            <Button onClick={sendBulkMail}>Send Email</Button>
           </div>
         </div>
       ) : (
