@@ -37,11 +37,14 @@ const NotificationComponent = (props) => {
   //Notification //
 
   const sendBulkMail = async () => {
-    const res = await axios.post("http://localhost:8082/v1/notification/bulk", {
-      emails,
-      emailSubject,
-      emailBody,
-    });
+    const res = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/notification/bulk`,
+      {
+        emails,
+        emailSubject,
+        emailBody,
+      }
+    );
     if (res.status == 200) {
       openNotification("success", res.data.message);
     } else {
