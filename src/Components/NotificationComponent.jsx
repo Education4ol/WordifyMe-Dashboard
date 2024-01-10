@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Input, Button, Select } from "antd";
+import { notification } from "antd";
 import axios from "axios";
 const NotificationComponent = (props) => {
   //States//
-
+  const [api, contextHolder] = notification.useNotification();
   const [options, setOptions] = useState();
   const [emails, setEmails] = useState([]);
   const [emailSubject, setEmailSubject] = useState();
   const [emailBody, setEmailBody] = useState();
   //
+  const openNotification = (type, message) => {
+    api[type]({
+      message: type,
+      description: message,
+      duration: 3,
+    });
+  };
+
   //fETCTHING uSERS//
   useEffect(() => {
     const getData = async () => {
@@ -25,6 +34,7 @@ const NotificationComponent = (props) => {
     };
     getData();
   }, []);
+  //Notification //
 
   const sendBulkMail = async () => {
     const res = await axios.post("http://localhost:8082/v1/notification/bulk", {
@@ -32,7 +42,11 @@ const NotificationComponent = (props) => {
       emailSubject,
       emailBody,
     });
-    console.log(res);
+    if (res.status == 200) {
+      openNotification("success", res.data.message);
+    } else {
+      openNotification("error", "Error sending mails");
+    }
   };
 
   const handleChange = (value) => {
@@ -43,6 +57,7 @@ const NotificationComponent = (props) => {
   const { TextArea } = Input;
   return (
     <>
+      {contextHolder}
       {props.push ? (
         <div className="notification-wrapper">
           <div className="push-notification-content">

@@ -8,7 +8,7 @@ import axios from "axios";
 const { confirm } = Modal;
 const showConfirm = (data, setState) => {
   confirm({
-    title: "Do you Want to Edit the Word Category",
+    title: "Do you Want to Edit the User",
     icon: <ExclamationCircleFilled />,
     content: <Space></Space>,
     onOk() {
